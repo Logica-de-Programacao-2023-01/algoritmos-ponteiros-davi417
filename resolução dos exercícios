@@ -1,0 +1,212 @@
+package main
+
+import "fmt"
+
+func main() {
+	var num int
+	n := 5
+	somaPrimeirosNaturais(&num, n)
+	fmt.Println("Soma dos", n, "primeiros números naturais:", num)
+}
+
+func somaPrimeirosNaturais(num *int, n int) {
+	soma := 0
+	for i := 1; i <= n; i++ {
+		soma += i
+	}
+	*num = soma
+}
+
+package main
+
+import "fmt"
+
+func main() {
+	var num int
+	num = 5
+	verificarParImpar(&num)
+	fmt.Println("Número após verificação:", num)
+}
+
+func verificarParImpar(num *int) {
+	if *num%2 == 0 {
+		*num = 0 // Par
+	} else {
+		*num = 1 // Ímpar
+	}
+}
+
+package main
+
+import "fmt"
+
+func main() {
+	texto := "Hello, world!"
+	reverterString(&texto)
+	fmt.Println("Texto após reverso:", texto)
+}
+
+func reverterString(texto *string) {
+	runes := []rune(*texto)
+	for i, j := 0, len(runes)-1; i < j; i, j = i+1, j-1 {
+		runes[i], runes[j] = runes[j], runes[i]
+	}
+	*texto = string(runes)
+}
+
+package main
+
+import "fmt"
+
+func main() {
+	var num int
+	num = 1234
+	somaUltimosDigitos(&num)
+	fmt.Println("Número após soma dos dois últimos dígitos:", num)
+}
+
+func somaUltimosDigitos(num *int) {
+	ultimoDigito := *num % 10
+	*num /= 10
+	penultimoDigito := *num % 10
+	soma := ultimoDigito + penultimoDigito
+	*num = soma
+}
+
+package main
+
+import (
+	"fmt"
+	"math"
+)
+
+func main() {
+	var num float64
+	num = 10.0
+	atualizarMediaPi(&num)
+	fmt.Println("Número após atualização:", num)
+}
+
+func atualizarMediaPi(num *float64) {
+	*num = (*num + math.Pi) / 2
+}
+
+package main
+
+import "fmt"
+
+type Livro struct {
+	titulo string
+	autor  string
+}
+
+func main() {
+	livro := Livro{
+		titulo: "Livro 1",
+		autor:  "Anônimo",
+	}
+	atualizarTitulo(livro)
+	fmt.Println("Título do livro:", livro.titulo)
+}
+
+func atualizarTitulo(l *Livro) {
+	if l.autor == "Anônimo" {
+		l.titulo = "Desconhecido"
+	}
+}
+
+package main
+
+import "fmt"
+
+type Conta struct {
+	saldo   float64
+	titular string
+}
+
+func main() {
+	conta := Conta{
+		saldo:   100.0,
+		titular: "John Doe",
+	}
+	adicionarValor(&conta, 50.0)
+	fmt.Println("Saldo da conta:", conta.saldo)
+}
+
+func adicionarValor(c *Conta, valor float64) {
+	c.saldo += valor
+}
+
+package main
+
+import (
+	"fmt"
+)
+
+func main() {
+	num := 10
+	modificarValor(&num)
+	fmt.Println("Valor após modificação:", num)
+}
+
+func modificarValor(p *int) {
+	*p = 20
+}
+
+package main
+
+import "fmt"
+
+type Livro struct {
+	Titulo string
+	Autor  string
+	Preco  float64
+}
+
+func main() {
+	livro := Livro{
+		Titulo: "Livro 1",
+		Autor:  "Autor 1",
+		Preco:  50.0,
+	}
+	aplicarDesconto(&livro, 0.1)
+	fmt.Println("Preço do livro após desconto:", livro.Preco)
+}
+
+func aplicarDesconto(l *Livro, desconto float64) {
+	l.Preco -= l.Preco * desconto
+}
+
+package main
+
+import "fmt"
+
+func main() {
+	var primos []int
+	tamanho := 10
+	preencherPrimos(&primos, tamanho)
+	fmt.Println("Números primos:", primos)
+}
+
+func preencherPrimos(primos *[]int, tamanho int) {
+	num := 2
+	for len(*primos) < tamanho {
+		if isPrimo(num) {
+			*primos = append(*primos, num)
+		}
+		num++
+	}
+}
+
+func isPrimo(num int) bool {
+	if num < 2 {
+		return false
+	}
+	for i := 2; i*i <= num; i++ {
+		if num%i == 0 {
+			return false
+		}
+	}
+	return true
+}
+
